@@ -49,9 +49,43 @@ COPY requirements_versions.txt .
 RUN pip install -r requirements_versions.txt
 
 # ============================================================================
+# clone required repositories
+# ============================================================================
+FROM dependencies AS repos
+
+WORKDIR /app
+
+# clone repositories at pinned commits
+RUN mkdir -p repositories && \
+    git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui-assets.git \
+        repositories/stable-diffusion-webui-assets && \
+    cd repositories/stable-diffusion-webui-assets && \
+    git checkout 6f7db241d2f8ba7457bac5ca9753331f0c266917
+
+RUN git clone https://github.com/Stability-AI/stablediffusion.git \
+        repositories/stable-diffusion-stability-ai && \
+    cd repositories/stable-diffusion-stability-ai && \
+    git checkout cf1d67a6fd5ea1aa600c4df58e5b47da45f6bdbf
+
+RUN git clone https://github.com/Stability-AI/generative-models.git \
+        repositories/generative-models && \
+    cd repositories/generative-models && \
+    git checkout 45c443b316737a4ab6e40413d7794a7f5657c19f
+
+RUN git clone https://github.com/crowsonkb/k-diffusion.git \
+        repositories/k-diffusion && \
+    cd repositories/k-diffusion && \
+    git checkout ab527a9a6d347f364e3d185ba6d714e22d80cb3c
+
+RUN git clone https://github.com/salesforce/BLIP.git \
+        repositories/BLIP && \
+    cd repositories/BLIP && \
+    git checkout 48211a1594f1321b00f14c9f7a5b4813144b2fb9
+
+# ============================================================================
 # final stage
 # ============================================================================
-FROM dependencies AS final
+FROM repos AS final
 
 WORKDIR /app
 
@@ -81,9 +115,9 @@ EXPOSE 7860
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD curl -f http://localhost:7860/ || exit 1
 
-# default command
+# run webui directly (repos already cloned at build time)
 CMD [ \
-    "python", "launch.py", \
+    "python", "webui.py", \
     "--api", "--xformers", "--listen", "--port", "7860", \
     "--skip-version-check", "--disable-safe-unpickle" \
 ]
