@@ -41,12 +41,15 @@ WORKDIR /app
 # install pytorch with cuda support first (large, rarely changes)
 RUN pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
-# install xformers for memory-efficient attention
-RUN pip install xformers
+# install xformers matching the pytorch/cuda version
+RUN pip install xformers --index-url https://download.pytorch.org/whl/cu121
 
 # copy and install requirements
 COPY requirements_versions.txt .
 RUN pip install -r requirements_versions.txt
+
+# install dctorch (required by k-diffusion)
+RUN pip install dctorch
 
 # ============================================================================
 # final stage
