@@ -48,8 +48,13 @@ RUN pip install xformers --index-url https://download.pytorch.org/whl/cu121
 COPY requirements_versions.txt .
 RUN pip install -r requirements_versions.txt
 
-# install dctorch (required by k-diffusion)
-RUN pip install dctorch
+# install k-diffusion dependencies not in requirements
+# - dctorch: discrete cosine transforms for layers.py
+# - clip-anytorch: CLIP model for evaluation.py (provides 'clip' module)
+# - wandb: experiment tracking (may be imported)
+# - scipy: scientific computing utilities
+# - lpips: perceptual loss for evaluation
+RUN pip install dctorch clip-anytorch wandb scipy lpips
 
 # ============================================================================
 # final stage
