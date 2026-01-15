@@ -1,0 +1,67 @@
+# Git
+.git
+.gitignore
+.github
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Python
+__pycache__
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info
+.eggs
+*.egg
+.mypy_cache
+.pytest_cache
+.ruff_cache
+
+# Virtual environments
+venv
+.venv
+env
+.env
+
+# Runtime data (should be mounted as volumes)
+models/Stable-diffusion/*.safetensors
+models/Stable-diffusion/*.ckpt
+models/VAE/*.safetensors
+models/VAE/*.ckpt
+models/Lora/*
+models/ControlNet/*
+outputs/*
+log/*
+
+# Keep directory structure
+!models/Stable-diffusion/.gitkeep
+!models/VAE/.gitkeep
+!outputs/.gitkeep
+
+# Cache
+*.cache
+cache/
+.cache/
+
+# Test files
+test/
+tests/
+*_test.py
+test_*.py
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Devcontainer (if any)
+.devcontainer
