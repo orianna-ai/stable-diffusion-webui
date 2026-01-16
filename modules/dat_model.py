@@ -60,19 +60,19 @@ def get_dat_models(scaler):
     return [
         UpscalerData(
             name="DAT x2",
-            path="https://github.com/n0kovo/dat_upscaler_models/raw/main/DAT/DAT_x2.pth",
+            path="https://raw.githubusercontent.com/n0kovo/dat_upscaler_models/refs/heads/main/DAT-2/DAT_2_x2.pth",
             scale=2,
             upscaler=scaler,
         ),
         UpscalerData(
             name="DAT x3",
-            path="https://github.com/n0kovo/dat_upscaler_models/raw/main/DAT/DAT_x3.pth",
+            path="https://raw.githubusercontent.com/n0kovo/dat_upscaler_models/refs/heads/main/DAT-2/DAT_2_x3.pth",
             scale=3,
             upscaler=scaler,
         ),
         UpscalerData(
             name="DAT x4",
-            path="https://github.com/n0kovo/dat_upscaler_models/raw/main/DAT/DAT_x4.pth",
+            path="https://raw.githubusercontent.com/n0kovo/dat_upscaler_models/refs/heads/main/DAT-2/DAT_2_x4.pth",
             scale=4,
             upscaler=scaler,
         ),
