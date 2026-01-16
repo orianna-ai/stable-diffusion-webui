@@ -57,22 +57,92 @@ class UpscalerDAT(Upscaler):
 
 
 def get_dat_models(scaler):
+    """
+    Returns all available DAT upscaler models.
+    Models are pre-downloaded to /app/models/DAT during Docker build.
+    
+    Variants:
+    - DAT: Original full model (~14.8M params)
+    - DAT-2: Balanced performance (~11.2M params)
+    - DAT-S: Small variant (~11.2M params, slightly lighter)
+    - DAT-light: Lightweight for limited compute (~573K params)
+    """
+    dat_models_path = "/app/models/DAT"
+    
     return [
+        # DAT (original) models
         UpscalerData(
             name="DAT x2",
-            path="https://raw.githubusercontent.com/n0kovo/dat_upscaler_models/refs/heads/main/DAT-2/DAT_2_x2.pth",
+            path=os.path.join(dat_models_path, "DAT_x2.pth"),
             scale=2,
             upscaler=scaler,
         ),
         UpscalerData(
             name="DAT x3",
-            path="https://raw.githubusercontent.com/n0kovo/dat_upscaler_models/refs/heads/main/DAT-2/DAT_2_x3.pth",
+            path=os.path.join(dat_models_path, "DAT_x3.pth"),
             scale=3,
             upscaler=scaler,
         ),
         UpscalerData(
             name="DAT x4",
-            path="https://raw.githubusercontent.com/n0kovo/dat_upscaler_models/refs/heads/main/DAT-2/DAT_2_x4.pth",
+            path=os.path.join(dat_models_path, "DAT_x4.pth"),
+            scale=4,
+            upscaler=scaler,
+        ),
+        # DAT-2 models (balanced performance)
+        UpscalerData(
+            name="DAT-2 x2",
+            path=os.path.join(dat_models_path, "DAT_2_x2.pth"),
+            scale=2,
+            upscaler=scaler,
+        ),
+        UpscalerData(
+            name="DAT-2 x3",
+            path=os.path.join(dat_models_path, "DAT_2_x3.pth"),
+            scale=3,
+            upscaler=scaler,
+        ),
+        UpscalerData(
+            name="DAT-2 x4",
+            path=os.path.join(dat_models_path, "DAT_2_x4.pth"),
+            scale=4,
+            upscaler=scaler,
+        ),
+        # DAT-S models (small variant)
+        UpscalerData(
+            name="DAT-S x2",
+            path=os.path.join(dat_models_path, "DAT_S_x2.pth"),
+            scale=2,
+            upscaler=scaler,
+        ),
+        UpscalerData(
+            name="DAT-S x3",
+            path=os.path.join(dat_models_path, "DAT_S_x3.pth"),
+            scale=3,
+            upscaler=scaler,
+        ),
+        UpscalerData(
+            name="DAT-S x4",
+            path=os.path.join(dat_models_path, "DAT_S_x4.pth"),
+            scale=4,
+            upscaler=scaler,
+        ),
+        # DAT-light models (fast, lightweight)
+        UpscalerData(
+            name="DAT-light x2",
+            path=os.path.join(dat_models_path, "DAT_light_x2.pth"),
+            scale=2,
+            upscaler=scaler,
+        ),
+        UpscalerData(
+            name="DAT-light x3",
+            path=os.path.join(dat_models_path, "DAT_light_x3.pth"),
+            scale=3,
+            upscaler=scaler,
+        ),
+        UpscalerData(
+            name="DAT-light x4",
+            path=os.path.join(dat_models_path, "DAT_light_x4.pth"),
             scale=4,
             upscaler=scaler,
         ),

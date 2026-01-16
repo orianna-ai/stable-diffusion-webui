@@ -84,10 +84,31 @@ RUN mkdir -p /app/models/Stable-diffusion \
              /app/models/VAE \
              /app/models/Lora \
              /app/models/ControlNet \
+             /app/models/DAT \
              /app/outputs \
              /app/extensions \
              /app/embeddings \
              /app/log
+
+# download DAT upscaler models (avoiding Git LFS issues)
+# Source: HuggingFace mirrors of official DAT models
+RUN cd /app/models/DAT && \
+    # DAT (original) - x2, x3, x4
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_x2.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_x3.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_x4.pth && \
+    # DAT-2 - x2, x3, x4
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_2_x2.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_2_x3.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_2_x4.pth && \
+    # DAT-S (small) - x2, x3, x4
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_S_x2.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_S_x3.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_S_x4.pth && \
+    # DAT-light - x2, x3, x4
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_light_x2.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_light_x3.pth && \
+    wget -q https://huggingface.co/licyk/sd-upscaler-models/resolve/main/DAT/DAT_light_x4.pth
 
 # environment variables for gpu memory management
 ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
